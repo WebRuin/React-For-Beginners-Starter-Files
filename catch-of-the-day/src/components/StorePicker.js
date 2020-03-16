@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { getFunName } from '../helpers';
+
 const StyledStorePicker = styled.form`
   background: #fff;
   max-width: 500px;
@@ -9,6 +11,14 @@ const StyledStorePicker = styled.form`
   box-shadow: 0 0 0 4px #dfa456, 0 0 0 8px #793817, 0 0 0 12px #ae0e60,
     0 0 0 16px #dfa456;
   border-radius: 10px;
+
+  & input {
+    padding: 2px 5px;
+  }
+
+  & ::-webkit-input-placeholder {
+    color: #666;
+  }
 
   & input,
   & button {
@@ -26,7 +36,12 @@ const StorePicker = () => {
   return (
     <StyledStorePicker>
       <h2>Please Enter A Store</h2>
-      <input type="" required placeholder="Store Name" />
+      <input
+        type=""
+        required
+        placeholder="Store Name"
+        defaultValue={getFunName()}
+      />
       <button type="submit">Visit Store</button>
     </StyledStorePicker>
   );

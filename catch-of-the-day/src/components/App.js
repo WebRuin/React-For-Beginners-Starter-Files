@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Header from './Header';
+import Inventory from './Inventory';
+import Order from './Order';
+import Pbj from './Pbj';
+
 const LunchBox = styled.div`
   display: -webkit-box;
   display: flex;
   height: 90vh;
-  max-width: 1500px;
+  max-width: 95vw;
   margin: 0 auto;
   margin-top: 5vh;
   -webkit-perspective: 1000px;
@@ -19,7 +24,6 @@ const LunchBox = styled.div`
     padding: 2rem;
     box-shadow: 0 0 0 4px #dfa456, 0 0 0 8px #793817, 0 0 0 12px #ae0e60,
       0 0 0 16px #dfa456;
-    border-radius: 10px;
     position: relative;
     background: #fff;
     -webkit-transition: all 0.3s;
@@ -52,7 +56,7 @@ const LunchBox = styled.div`
     display: -webkit-box;
     display: flex;
     height: 90vh;
-    max-width: 1500px;
+    max-width: 95vw;
     margin: 0 auto;
     margin-top: 5vh;
     -webkit-perspective: 1000px;
@@ -66,7 +70,6 @@ const LunchBox = styled.div`
     padding: 2rem;
     box-shadow: 0 0 0 4px #dfa456, 0 0 0 8px #793817, 0 0 0 12px #ae0e60,
       0 0 0 16px #dfa456;
-    border-radius: 10px;
     position: relative;
     background: #fff;
     -webkit-transition: all 0.3s;
@@ -100,7 +103,15 @@ const LunchBox = styled.div`
 const App = () => {
   return (
     <LunchBox>
-      <p>heyyy!</p>
+      <div className="menu">
+        <Header tagline="A new take on the quintessential sandwich!" />
+        <Pbj />
+        <Pbj />
+        <Pbj />
+        <Pbj />
+      </div>
+      <Order />
+      <Inventory />
     </LunchBox>
   );
 };

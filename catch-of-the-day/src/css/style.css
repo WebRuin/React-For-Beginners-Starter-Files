@@ -245,7 +245,7 @@ body {
   font-size: 2rem;
 }
 h1 {
-  font-family: 'Raleway', 'blanchcaps_inline', sans-serif;
+  font-family: 'blanchcaps_inline', 'Raleway', sans-serif;
   text-align: center;
   font-weight: normal;
   margin: 0;
@@ -266,111 +266,8 @@ h2 {
 h3 {
   font-size: 3rem;
 }
-header.top {
-  text-align: center;
-}
-header.top h1 {
-  font-size: 14.4rem;
-  line-height: 0.7;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-}
-header.top h1 .ofThe {
-  display: -webkit-box;
-  display: flex;
-  font-size: 3rem;
-  color: #f5a623;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-  background: url('images/anchor.svg') center no-repeat;
-  background-size: cover;
-  padding: 0 1rem;
-}
-header.top h1 .ofThe .of {
-  padding-right: 2rem;
-  position: relative;
-  right: -0.5rem;
-}
-header.top h3 {
-  margin: 0;
-  font-size: 2rem;
-  color: #f5a623;
-  position: relative;
-  display: inline-block;
-}
-header.top h3 span {
-  background: #fff;
-  position: relative;
-  z-index: 2;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-header.top h3:before,
-header.top h3:after {
-  display: block;
-  z-index: 1;
-  background: #000;
-  position: absolute;
-  width: 130%;
-  height: 1px;
-  content: '';
-  top: 5px;
-  margin-left: -15%;
-}
-header.top h3:after {
-  top: auto;
-  bottom: 7px;
-}
-.catch-of-the-day {
-  display: -webkit-box;
-  display: flex;
-  height: 90vh;
-  max-width: 1500px;
-  margin: 0 auto;
-  margin-top: 5vh;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-.catch-of-the-day > * {
-  -webkit-box-flex: 1;
-  flex: 1 4 auto;
-  padding: 2rem;
-  border: 1rem double #1a1a1a;
-  position: relative;
-  background: #fff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-  overflow: scroll;
-}
-.catch-of-the-day > *:first-child {
-  flex-shrink: 1;
-  flex-basis: 50%;
-  -webkit-transform: translateX(50%) rotateY(6deg) translateX(-50%);
-  transform: translateX(50%) rotateY(6deg) translateX(-50%);
-}
-.catch-of-the-day > *:nth-child(2) {
-  -webkit-transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-  transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-  border-left: 0;
-  border-right: 0;
-  min-width: 300px;
-}
-.catch-of-the-day > *:last-child {
-  flex-shrink: 1;
-  flex-basis: 50%;
-  -webkit-transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08)
-    translateX(24px);
-  transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08)
-    translateX(24px);
-}
-input#fold:not(:checked) ~ #main .catch-of-the-day > * {
+
+input#fold:not(:checked) ~ #main [class*='App__LunchBox'] > * {
   -webkit-transform: none;
   transform: none;
 }

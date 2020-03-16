@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.7",
     "concurrently": "4.1.0"
   },
   "dependencies": {
@@ -135,6 +136,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "babel-plugin-styled-components"
     ]
   },
   "eslintConfig": {
