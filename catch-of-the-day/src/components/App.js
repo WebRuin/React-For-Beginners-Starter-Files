@@ -6,17 +6,14 @@ import Inventory from './Inventory';
 import Order from './Order';
 import Pbj from './Pbj';
 
+import testData from '../sample-fishes';
+
 const LunchBox = styled.div`
   display: -webkit-box;
   display: flex;
-  height: 90vh;
-  max-width: 95vw;
-  margin: 0 auto;
-  margin-top: 5vh;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
+  margin: 16px;
+  height: calc(100vh - 32px);
+  max-width: calc(100vw - 32px);
 
   & > * {
     -webkit-box-flex: 1;
@@ -31,38 +28,12 @@ const LunchBox = styled.div`
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     overflow: scroll;
   }
-  & > *:first-child {
-    flex-shrink: 1;
-    flex-basis: 50%;
-    -webkit-transform: translateX(50%) rotateY(6deg) translateX(-50%);
-    transform: translateX(50%) rotateY(6deg) translateX(-50%);
-  }
-  & > *:nth-child(2) {
-    -webkit-transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-    transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-    border-left: 0;
-    border-right: 0;
-    min-width: 300px;
-  }
-  & > *:last-child {
-    flex-shrink: 1;
-    flex-basis: 50%;
-    -webkit-transform: translateX(-50%) rotateY(10deg) translateX(50%)
-      scale(1.08) translateX(24px);
-    transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08)
-      translateX(24px);
-  }
   & {
     display: -webkit-box;
     display: flex;
-    height: 90vh;
-    max-width: 95vw;
-    margin: 0 auto;
-    margin-top: 5vh;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    margin: 16px;
+    height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
   }
   & > * {
     -webkit-box-flex: 1;
@@ -72,48 +43,77 @@ const LunchBox = styled.div`
       0 0 0 16px #dfa456;
     position: relative;
     background: #fff;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    /* box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); */
     overflow: scroll;
   }
   & > *:first-child {
     flex-shrink: 1;
     flex-basis: 50%;
-    -webkit-transform: translateX(50%) rotateY(6deg) translateX(-50%);
-    transform: translateX(50%) rotateY(6deg) translateX(-50%);
   }
   & > *:nth-child(2) {
-    -webkit-transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-    transform: translateX(-50%) rotateY(-14deg) translateX(50%);
-    border-left: 0;
-    border-right: 0;
     min-width: 300px;
   }
   & > *:last-child {
     flex-shrink: 1;
     flex-basis: 50%;
-    -webkit-transform: translateX(-50%) rotateY(10deg) translateX(50%)
-      scale(1.08) translateX(24px);
-    transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08)
-      translateX(24px);
   }
 `;
 
-const App = () => {
-  return (
-    <LunchBox>
-      <div className="menu">
-        <Header tagline="A new take on the quintessential sandwich!" />
-        <Pbj />
-        <Pbj />
-        <Pbj />
-        <Pbj />
-      </div>
-      <Order />
-      <Inventory />
-    </LunchBox>
-  );
-};
+const StyledList = styled.ul`
+  padding-top: 5px;
+  margin-top: 2rem;
+`;
+
+class App extends React.Component {
+  state = {
+    sandwiches: {},
+    order: {}
+  };
+
+  addSandwich = sandwich => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[`sanswich-${Date.now()}`] = sandwich;
+    this.setState({ sandwiches });
+  };
+
+  addTestData = () => {
+    this.setState({ sandwiches: testData });
+  };
+
+  UNSAFE_componentWillMount() {
+    this.addTestData();
+  }
+
+  addToOrder = key => {
+    const order = { ...this.state.order };
+    order[key] = order[key] + 1 || 1;
+    this.setState({ order });
+  };
+
+  render() {
+    const { sandwiches } = this.state;
+    return (
+      <LunchBox>
+        <div className="menu">
+          <Header tagline="A new take on the quintessential nut butter and jelly sandwich!" />
+          <StyledList>
+            {Object.keys(sandwiches).map(key => (
+              <Pbj
+                key={key}
+                index={key}
+                sandwich={sandwiches[key]}
+                addToOrder={this.addToOrder}
+              />
+            ))}
+          </StyledList>
+        </div>
+        <Order order={this.state.order} sandwiches={this.state.sandwiches} />
+        <Inventory
+          addSandwich={this.addSandwich}
+          addTestData={this.addTestData}
+        />
+      </LunchBox>
+    );
+  }
+}
 
 export default App;

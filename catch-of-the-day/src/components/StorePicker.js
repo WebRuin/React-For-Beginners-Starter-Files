@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Button from './Button';
+
 import { getFunName } from '../helpers';
 
 const StyledStorePicker = styled.form`
@@ -13,7 +15,7 @@ const StyledStorePicker = styled.form`
   border-radius: 10px;
 
   & input {
-    padding: 2px 5px;
+    text-align: center;
   }
 
   & ::-webkit-input-placeholder {
@@ -32,19 +34,30 @@ const StyledStorePicker = styled.form`
   }
 `;
 
-const StorePicker = () => {
-  return (
-    <StyledStorePicker>
-      <h2>Please Enter A Store</h2>
-      <input
-        type=""
-        required
-        placeholder="Store Name"
-        defaultValue={getFunName()}
-      />
-      <button type="submit">Visit Store</button>
-    </StyledStorePicker>
-  );
-};
+class StorePicker extends React.Component {
+  myInput = React.createRef();
+
+  goToStore = e => {
+    e.preventDefault();
+    const store = this.myInput.current.value;
+    this.props.history.push(`/store/${store}`);
+  };
+
+  render() {
+    return (
+      <StyledStorePicker onSubmit={this.goToStore}>
+        <h2>Please Enter A Store</h2>
+        <input
+          type="text"
+          ref={this.myInput}
+          required
+          placeholder="Store Name"
+          defaultValue={getFunName()}
+        />
+        <Button type="submit">Visit Store</Button>
+      </StyledStorePicker>
+    );
+  }
+}
 
 export default StorePicker;

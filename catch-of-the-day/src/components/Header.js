@@ -26,30 +26,6 @@ const H3 = styled.h3`
   font-weight: bold;
   position: relative;
   display: inline-block;
-
-  /* & span {
-    background: #fff;
-    position: relative;
-    z-index: 2;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  &:before,
-  &:after {
-    display: block;
-    z-index: 1;
-    background: #793817;
-    position: absolute;
-    width: 130%;
-    height: 2px;
-    content: '';
-    top: 8px;
-    margin-left: -15%;
-  }
-  &:after {
-    top: auto;
-    bottom: 8px;
-  } */
 `;
 
 const Header = ({ tagline }) => (

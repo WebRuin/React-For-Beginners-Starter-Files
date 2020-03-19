@@ -1,8 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
+
+import AddSandwichForm from './AddSandwichForm';
 
 const Inventory = props => {
-  return <div className="inventory">inventory</div>;
+  const addSandwich = props.addSandwich;
+  return (
+    <div className="inventory">
+      <h2>Inventory</h2>
+      <AddSandwichForm addSandwich={addSandwich} />
+    </div>
+  );
 };
 
 export default Inventory;
