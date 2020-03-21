@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import base from '../base';
+
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
 import Pbj from './Pbj';
 
 import testData from '../sample-fishes';
+
+const pattern = '/images/pattern3.png';
 
 const LunchBox = styled.div`
   display: -webkit-box;
@@ -15,19 +19,6 @@ const LunchBox = styled.div`
   height: calc(100vh - 32px);
   max-width: calc(100vw - 32px);
 
-  & > * {
-    -webkit-box-flex: 1;
-    flex: 1 4 auto;
-    padding: 2rem;
-    box-shadow: 0 0 0 4px #dfa456, 0 0 0 8px #793817, 0 0 0 12px #ae0e60,
-      0 0 0 16px #dfa456;
-    position: relative;
-    background: #fff;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    overflow: scroll;
-  }
   & {
     display: -webkit-box;
     display: flex;
@@ -42,7 +33,7 @@ const LunchBox = styled.div`
     box-shadow: 0 0 0 4px #dfa456, 0 0 0 8px #793817, 0 0 0 12px #ae0e60,
       0 0 0 16px #dfa456;
     position: relative;
-    background: #fff;
+    background-image: url(${pattern});
     overflow: scroll;
   }
   & > *:first-child {
@@ -69,19 +60,37 @@ class App extends React.Component {
     order: {}
   };
 
+  UNSAFE_componentWillMount() {
+    const { params } = this.props.match;
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+    this.ref = base.syncState(`${params.storeId}/sandwiches`, {
+      context: this,
+      state: 'sandwiches'
+    });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  componentDidUpdate() {
+    const { params } = this.props.match;
+    const order = JSON.stringify(this.state.order);
+    localStorage.setItem(params.storeId, order);
+  }
+
   addSandwich = sandwich => {
     const sandwiches = { ...this.state.sandwiches };
-    sandwiches[`sanswich-${Date.now()}`] = sandwich;
+    sandwiches[`sandwich-${Date.now()}`] = sandwich;
     this.setState({ sandwiches });
   };
 
   addTestData = () => {
     this.setState({ sandwiches: testData });
   };
-
-  UNSAFE_componentWillMount() {
-    this.addTestData();
-  }
 
   addToOrder = key => {
     const order = { ...this.state.order };

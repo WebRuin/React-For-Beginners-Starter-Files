@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledForm = styled.form`
   margin-bottom: 20px;
-  border: 2px solid #000;
+  border: 2px solid #793817;
   overflow: hidden;
   display: -webkit-box;
   display: flex;
@@ -17,13 +17,12 @@ const StyledForm = styled.form`
     line-height: 1;
     font-size: 1.2rem;
     border: 0;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
+    border-bottom: 1px solid #dfa456;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border-radius: 0;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.5);
   }
   & input:focus,
   & textarea:focus,
@@ -40,6 +39,13 @@ const StyledForm = styled.form`
   & button {
     width: 100%;
     border: 0;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  & button:hover {
+    width: 100%;
+    border: 0;
+    color: #fff;
+    background: #ae0e60;
   }
 `;
 

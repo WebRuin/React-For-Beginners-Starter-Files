@@ -1,5 +1,7 @@
 import React from 'react';
-// import styled from 'styled-components';
+
+import Button from './Button';
+//import styled from 'styled-components';
 
 import AddSandwichForm from './AddSandwichForm';
 
@@ -9,6 +11,8 @@ const Inventory = props => {
     <div className="inventory">
       <h2>Inventory</h2>
       <AddSandwichForm addSandwich={addSandwich} />
+
+      <button onClick={props.addTestData}>Add</button>
     </div>
   );
 };

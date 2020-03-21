@@ -17,7 +17,7 @@ const H1 = styled.h1`
 `;
 
 const H3 = styled.h3`
-  background: #ae0e60;
+  background: #ae0e60bf;
   color: #fff;
   text-transform: uppercase;
   margin: 0;

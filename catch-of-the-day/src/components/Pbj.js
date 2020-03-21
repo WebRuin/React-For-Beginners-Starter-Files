@@ -10,6 +10,7 @@ const StyledPbj = styled.li`
   margin-bottom: 5px;
   clear: both;
   overflow: hidden;
+  position: relative;
 
   & h3 {
     font-size: 2rem;
@@ -48,14 +49,17 @@ const StyledPbj = styled.li`
     font-size: 1.5rem;
     font-family: 'Quicksand', 'Raleway', sans-serif;
     transition: all 0.2s;
-    position: relative;
+    position: absolute;
     z-index: 2;
+    bottom: 0;
+    right: 0;
 
     &[disabled] {
       color: #d12028;
       background: #fff;
       border-color: #d12028;
       transform: rotate(-10deg) scale(2) translateX(50%) translateY(-50%);
+      right: 50%;
     }
     &[disabled]:hover {
       color: #d12028;

@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import { formatPrice } from '../helpers';
 
 const StyledOrder = styled.div`
-  ul.order li {
-    border-bottom: 1px solid #000;
-    padding: 2rem 0;
+  border: 2px solid #793817;
+
+  ul li {
+    border-bottom: 1px solid #dfa456;
+    padding: 2rem 5px;
     display: -webkit-box;
     display: flex;
     font-size: 1.4rem;
@@ -14,36 +16,38 @@ const StyledOrder = styled.div`
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
+    background: rgba(255, 255, 255, 0.6);
   }
-  ul.order li:hover button {
+  ul li:hover button {
     display: inline;
   }
-  ul.order li button {
+  ul li button {
     border: 0;
     display: none;
     line-height: 1;
     padding: 0;
   }
-  ul.order li.unavailable {
+  ul li.unavailable {
     text-decoration: line-through;
     background: #f8d0d2;
   }
-  ul.order li .price {
+  ul li .price {
     font-size: 1.2rem;
   }
-  ul.order li span.count {
+  ul li span.count {
     position: relative;
     overflow: hidden;
     float: left;
   }
-  ul.order li span.count span {
+  ul li span.count span {
     display: inline-block;
   }
   .total {
+    color: #fff;
     padding: 2rem 0;
     font-size: 1.4rem;
-    border-bottom: 3px solid #000;
-    border-top: 3px double #000;
+    background: #ae0e60bf;
+    padding-right: 5px;
   }
   .total strong {
     float: right;
@@ -58,10 +62,21 @@ class Order extends React.Component {
     console.log(key);
     const sandwich = this.props.sandwiches[key];
     const count = this.props.order[key];
+    const isAvailable = sandwich && sandwich.status === 'available';
+    if (!sandwich) return null;
+    if (isAvailable) {
+      return (
+        <li key={key}>
+          ({count}){sandwich.name}:{' '}
+          <strong>{formatPrice(count * sandwich.price)}</strong>
+        </li>
+      );
+    }
     return (
-      <li key={key}>{`${count} ${sandwich.name}: ${formatPrice(
-        count * sandwich.price
-      )}`}</li>
+      <li key={key}>
+        Sorry, {sandwich ? sandwich.name : 'sandwich'} is not currently
+        available. 😞
+      </li>
     );
   };
   render() {
@@ -77,8 +92,8 @@ class Order extends React.Component {
     }, 0);
     return (
       <div className="order-wrap">
+        <h2>Your Order</h2>
         <StyledOrder>
-          <h2>Your Order</h2>
           <ul className="order">{orderIds.map(this.renderOrder)}</ul>
           <div className="total">
             <strong>Total:{` ${formatPrice(total)}`}</strong>

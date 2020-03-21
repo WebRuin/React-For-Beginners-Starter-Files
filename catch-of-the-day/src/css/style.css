@@ -260,7 +260,16 @@ h1 {
   font-weight: normal;
   margin: 0;
 }
-h2,
+h2 {
+  font-size: 6rem;
+  font-family: 'blanchcaps_inline', 'Raleway', sans-serif;
+  background: linear-gradient(138deg, #dfa456, #793817, #ae0e60, #dfa456);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 0.6;
+  font-weight: 100;
+}
+
 h3,
 h4,
 h5,
