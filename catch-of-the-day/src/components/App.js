@@ -98,6 +98,26 @@ class App extends React.Component {
     this.setState({ order });
   };
 
+  editSandwich = (key, editedSandwich) => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[key] = editedSandwich;
+    this.setState({ sandwiches });
+  };
+
+  deleteSandwich = key => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[key] = null;
+    this.setState({ sandwiches });
+  };
+
+  deleteFromOrder = key => {
+    const { params } = this.props.match;
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order });
+    localStorage.removeItem(params.storeId, order);
+  };
+
   render() {
     const { sandwiches } = this.state;
     return (
@@ -115,10 +135,17 @@ class App extends React.Component {
             ))}
           </StyledList>
         </div>
-        <Order order={this.state.order} sandwiches={this.state.sandwiches} />
+        <Order
+          order={this.state.order}
+          sandwiches={this.state.sandwiches}
+          deleteFromOrder={this.deleteFromOrder}
+        />
         <Inventory
           addSandwich={this.addSandwich}
           addTestData={this.addTestData}
+          deleteSandwich={this.deleteSandwich}
+          editSandwich={this.editSandwich}
+          sandwiches={this.state.sandwiches}
         />
       </LunchBox>
     );

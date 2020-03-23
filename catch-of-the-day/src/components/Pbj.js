@@ -42,9 +42,9 @@ const StyledPbj = styled.li`
 
   button {
     text-transform: uppercase;
-    color: #fff;
-    background: #793817;
-    border: 1px solid #793817;
+    color: #793817;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid #ae0e60bf;
     font-weight: 600;
     font-size: 1.5rem;
     font-family: 'Quicksand', 'Raleway', sans-serif;
@@ -68,9 +68,9 @@ const StyledPbj = styled.li`
     &:hover,
     &:focus {
       outline: 0;
-      color: #793817;
-      background: #fff;
-      border: 1px solid #793817;
+      color: #fff;
+      background: #ae0e60bf;
+      /* border: 1px solid #793817; */
     }
     &:hover:after,
     &:focus:after {

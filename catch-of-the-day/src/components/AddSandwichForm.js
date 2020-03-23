@@ -45,7 +45,7 @@ const StyledForm = styled.form`
     width: 100%;
     border: 0;
     color: #fff;
-    background: #ae0e60;
+    background: #ae0e60bf;
   }
 `;
 

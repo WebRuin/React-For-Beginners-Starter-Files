@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { formatPrice } from '../helpers';
 
@@ -55,6 +58,57 @@ const StyledOrder = styled.div`
   .order-title {
     text-align: center;
   }
+
+  .order-enter {
+    transform: translateX(-120%);
+    transition: 0.5s;
+    max-height: 0;
+    padding: 0 !important;
+
+    &.order-enter-active {
+      max-height: 60px;
+      transform: translateX(0);
+      padding: 2rem 0 !important;
+    }
+  }
+
+  .order-exit {
+    transition: 0.5s;
+    transform: translateX(0);
+
+    &.order-exit-active {
+      transform: translateX(120%);
+      padding: 0;
+    }
+  }
+
+  .count-enter {
+    background: red;
+    transition: 0.25s;
+    transform: translateY(100%);
+
+    &.count-enter-active {
+      background: yellow transform translateY(0);
+    }
+  }
+
+  .count-exit {
+    transform: translateY(0);
+    transition: 0.25s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    &.count-exit-active {
+      transform: translateY(-100%) scale(1.5);
+    }
+  }
+
+  .delete {
+    position: absolute;
+    right: 30px;
+    color: #ae0e60;
+  }
 `;
 
 class Order extends React.Component {
@@ -63,20 +117,47 @@ class Order extends React.Component {
     const sandwich = this.props.sandwiches[key];
     const count = this.props.order[key];
     const isAvailable = sandwich && sandwich.status === 'available';
+    const transitionsOptions = {
+      classNames: 'order',
+      key,
+      timeout: { enter: 500, exit: 500 }
+    };
+
     if (!sandwich) return null;
     if (isAvailable) {
       return (
-        <li key={key}>
-          ({count}){sandwich.name}:{' '}
-          <strong>{formatPrice(count * sandwich.price)}</strong>
-        </li>
+        <CSSTransition {...transitionsOptions}>
+          <li key={key}>
+            <span>
+              <TransitionGroup component="span" className="count">
+                <CSSTransition
+                  classNames="count"
+                  key={count}
+                  timeout={{ enter: 250, exit: 250 }}
+                >
+                  <span>{count}</span>
+                </CSSTransition>
+              </TransitionGroup>
+              {` ${sandwich.name}  `}
+              <strong>{formatPrice(count * sandwich.price)}</strong>
+              <button
+                className="delete"
+                onClick={() => this.props.deleteFromOrder(key)}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </button>
+            </span>
+          </li>
+        </CSSTransition>
       );
     }
     return (
-      <li key={key}>
-        Sorry, {sandwich ? sandwich.name : 'sandwich'} is not currently
-        available. 😞
-      </li>
+      <CSSTransition {...transitionsOptions}>
+        <li key={key}>
+          Sorry, {sandwich ? sandwich.name : 'sandwich'} is not currently
+          available. 😞
+        </li>
+      </CSSTransition>
     );
   };
   render() {
@@ -94,7 +175,9 @@ class Order extends React.Component {
       <div className="order-wrap">
         <h2>Your Order</h2>
         <StyledOrder>
-          <ul className="order">{orderIds.map(this.renderOrder)}</ul>
+          <TransitionGroup component="ul" className="order">
+            {orderIds.map(this.renderOrder)}
+          </TransitionGroup>
           <div className="total">
             <strong>Total:{` ${formatPrice(total)}`}</strong>
           </div>
