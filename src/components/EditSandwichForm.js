@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
@@ -105,5 +106,15 @@ class EditSandwichForm extends React.Component {
     );
   }
 }
+
+EditSandwichForm.propType = {
+  sandwich: PropTypes.exact({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    status: PropTypes.string,
+    desc: PropTypes.string,
+    image: PropTypes.string
+  })
+};
 
 export default EditSandwichForm;

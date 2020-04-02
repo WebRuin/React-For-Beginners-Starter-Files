@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -49,7 +50,7 @@ const StyledForm = styled.form`
   }
 `;
 
-class addSandwichForm extends React.Component {
+class AddSandwichForm extends React.Component {
   formRef = React.createRef();
   nameRef = React.createRef();
   priceRef = React.createRef();
@@ -96,4 +97,8 @@ class addSandwichForm extends React.Component {
   }
 }
 
-export default addSandwichForm;
+AddSandwichForm.propType = {
+  addSandwich: PropTypes.func.isRequired
+};
+
+export default AddSandwichForm;

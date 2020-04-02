@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledInputSubmit = styled.button`
@@ -88,5 +89,9 @@ const StyledInputSubmit = styled.button`
 const InputSubmit = props => (
   <StyledInputSubmit>{props.children}</StyledInputSubmit>
 );
+
+InputSubmit.propType = {
+  children: PropTypes.element.isRequired
+};
 
 export default InputSubmit;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { formatPrice } from '../helpers';
@@ -134,6 +135,18 @@ const Pbj = props => {
       </button>
     </StyledPbj>
   );
+};
+
+Pbj.propTypes = {
+  addToOrder: PropTypes.func.isRequired,
+  index: PropTypes.string.isRequired,
+  sandwich: PropTypes.exact({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired
+  })
 };
 
 export default Pbj;

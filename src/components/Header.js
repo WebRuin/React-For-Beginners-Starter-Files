@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
@@ -36,5 +37,9 @@ const Header = ({ tagline }) => (
     </H3>
   </StyledHeader>
 );
+
+Header.propType = {
+  tagline: PropTypes.string.isRequired
+};
 
 export default Header;

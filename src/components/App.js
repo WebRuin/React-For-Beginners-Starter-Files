@@ -146,6 +146,7 @@ class App extends React.Component {
           deleteSandwich={this.deleteSandwich}
           editSandwich={this.editSandwich}
           sandwiches={this.state.sandwiches}
+          storeId={this.props.match.params.storeId}
         />
       </LunchBox>
     );
