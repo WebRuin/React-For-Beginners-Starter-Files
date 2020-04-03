@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const pattern = '/images/pattern3.png';
+const pattern =
+  'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
 
 const H1 = styled.h1`
   font-size: 8rem;

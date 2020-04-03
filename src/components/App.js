@@ -10,7 +10,8 @@ import Pbj from './Pbj';
 
 import testData from '../sample-fishes';
 
-const pattern = '/images/pattern3.png';
+const pattern =
+  'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
 
 const LunchBox = styled.div`
   display: -webkit-box;
