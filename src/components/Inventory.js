@@ -6,7 +6,7 @@ import AddSandwichForm from './AddSandwichForm';
 import EditSandwichForm from './EditSandwichForm';
 import Login from './Login';
 import base, { firebaseApp } from '../base';
-import { render } from 'react-dom';
+import { StateContext } from './App';
 
 class Inventory extends React.Component {
   state = {
@@ -21,6 +21,16 @@ class Inventory extends React.Component {
       }
     });
   }
+  addSandwich = sandwich => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[`sandwich-${Date.now()}`] = sandwich;
+    this.setState({ sandwiches });
+  };
+
+  addTestData = () => {
+    this.setState({ sandwiches: testData });
+  };
+
   authHandler = async authData => {
     const store = await base.fetch(this.props.storeId, { context: this });
     if (!store.owner) {
@@ -40,6 +50,18 @@ class Inventory extends React.Component {
       .auth()
       .signInWithPopup(authProvider)
       .then(this.authHandler);
+  };
+
+  deleteSandwich = key => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[key] = null;
+    this.setState({ sandwiches });
+  };
+
+  editSandwich = (key, editedSandwich) => {
+    const sandwiches = { ...this.state.sandwiches };
+    sandwiches[key] = editedSandwich;
+    this.setState({ sandwiches });
   };
 
   logout = async () => {

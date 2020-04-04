@@ -10,6 +10,14 @@ import Pbj from './Pbj';
 
 import testData from '../sample-fishes';
 
+const DEFAULT_STATE = {
+  sandwiches: {},
+  order: {},
+  storeId: ''
+};
+
+export const StateContext = React.createContext(DEFAULT_STATE);
+
 const pattern =
   'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
 
@@ -56,10 +64,7 @@ const StyledList = styled.ul`
 `;
 
 class App extends React.Component {
-  state = {
-    sandwiches: {},
-    order: {}
-  };
+  state = DEFAULT_STATE;
 
   UNSAFE_componentWillMount() {
     const { params } = this.props.match;
@@ -71,6 +76,7 @@ class App extends React.Component {
       context: this,
       state: 'sandwiches'
     });
+    this.setState({ storeId: this.props.match.params.storeId });
   }
 
   componentWillUnmount() {
