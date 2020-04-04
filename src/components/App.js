@@ -8,6 +8,8 @@ import Inventory from './Inventory';
 import Order from './Order';
 import Pbj from './Pbj';
 
+import testData from '../sample-fishes';
+
 const DEFAULT_STATE = {
   sandwiches: {},
   order: {},
