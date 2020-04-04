@@ -8,12 +8,10 @@ import Inventory from './Inventory';
 import Order from './Order';
 import Pbj from './Pbj';
 
-import testData from '../sample-fishes';
-
 const DEFAULT_STATE = {
   sandwiches: {},
   order: {},
-  storeId: ''
+  storeId: '',
 };
 
 export const StateContext = React.createContext(DEFAULT_STATE);
@@ -74,7 +72,7 @@ class App extends React.Component {
     }
     this.ref = base.syncState(`${params.storeId}/sandwiches`, {
       context: this,
-      state: 'sandwiches'
+      state: 'sandwiches',
     });
     this.setState({ storeId: this.props.match.params.storeId });
   }
@@ -89,7 +87,7 @@ class App extends React.Component {
     localStorage.setItem(params.storeId, order);
   }
 
-  addSandwich = sandwich => {
+  addSandwich = (sandwich) => {
     const sandwiches = { ...this.state.sandwiches };
     sandwiches[`sandwich-${Date.now()}`] = sandwich;
     this.setState({ sandwiches });
@@ -99,7 +97,7 @@ class App extends React.Component {
     this.setState({ sandwiches: testData });
   };
 
-  addToOrder = key => {
+  addToOrder = (key) => {
     const order = { ...this.state.order };
     order[key] = order[key] + 1 || 1;
     this.setState({ order });
@@ -111,13 +109,13 @@ class App extends React.Component {
     this.setState({ sandwiches });
   };
 
-  deleteSandwich = key => {
+  deleteSandwich = (key) => {
     const sandwiches = { ...this.state.sandwiches };
     sandwiches[key] = null;
     this.setState({ sandwiches });
   };
 
-  deleteFromOrder = key => {
+  deleteFromOrder = (key) => {
     const { params } = this.props.match;
     const order = { ...this.state.order };
     delete order[key];
@@ -132,7 +130,7 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="A new take on the quintessential nut butter and jelly sandwich!" />
           <StyledList>
-            {Object.keys(sandwiches).map(key => (
+            {Object.keys(sandwiches).map((key) => (
               <Pbj
                 key={key}
                 index={key}

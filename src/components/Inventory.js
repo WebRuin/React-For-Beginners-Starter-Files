@@ -7,21 +7,22 @@ import EditSandwichForm from './EditSandwichForm';
 import Login from './Login';
 import base, { firebaseApp } from '../base';
 import { StateContext } from './App';
+import testData from '../sample-fishes';
 
 class Inventory extends React.Component {
   state = {
     uuid: null,
-    owner: null
+    owner: null,
   };
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.authHandler({ user });
       }
     });
   }
-  addSandwich = sandwich => {
+  addSandwich = (sandwich) => {
     const sandwiches = { ...this.state.sandwiches };
     sandwiches[`sandwich-${Date.now()}`] = sandwich;
     this.setState({ sandwiches });
@@ -31,28 +32,25 @@ class Inventory extends React.Component {
     this.setState({ sandwiches: testData });
   };
 
-  authHandler = async authData => {
+  authHandler = async (authData) => {
     const store = await base.fetch(this.props.storeId, { context: this });
     if (!store.owner) {
       await base.post(`${this.props.storeId}/owner`, {
-        data: authData.user.uid
+        data: authData.user.uid,
       });
     }
     this.setState({
       uuid: authData.user.uid,
-      owner: store.owner || authData.user.uid
+      owner: store.owner || authData.user.uid,
     });
   };
 
-  authenticate = provider => {
+  authenticate = (provider) => {
     const authProvider = new firebase.auth[`${provider}AuthProvider`]();
-    firebaseApp
-      .auth()
-      .signInWithPopup(authProvider)
-      .then(this.authHandler);
+    firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
   };
 
-  deleteSandwich = key => {
+  deleteSandwich = (key) => {
     const sandwiches = { ...this.state.sandwiches };
     sandwiches[key] = null;
     this.setState({ sandwiches });
@@ -90,7 +88,7 @@ class Inventory extends React.Component {
       <div className="inventory">
         <h2>Inventory</h2>
         {logout}
-        {Object.keys(this.props.sandwiches).map(key => (
+        {Object.keys(this.props.sandwiches).map((key) => (
           <EditSandwichForm
             key={key}
             index={key}
@@ -111,7 +109,7 @@ EditSandwichForm.propType = {
   addTestData: PropTypes.func.isRequired,
   deleteSandwich: PropTypes.func.isRequired,
   editSandwich: PropTypes.func.isRequired,
-  sandwich: PropTypes.array.isRequired
+  sandwich: PropTypes.array.isRequired,
 };
 
 export default Inventory;
