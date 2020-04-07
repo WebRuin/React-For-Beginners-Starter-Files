@@ -32,7 +32,10 @@ class NotFound extends React.Component {
       <StyledNotFound>
         <p>Opps... There is no page here</p>
         <CroppedImg>
-          <img src="/images/Nom-Nom1.gif" alt="Nom Nom" />
+          <img
+            src="https://res.cloudinary.com/tihos/image/upload/q_auto/v1586238052/The%20Classic%20Lunchbox/Nom-Nom1.gif"
+            alt="Nom Nom"
+          />
         </CroppedImg>
         <Button onClick={this.goHome}>
           Let's get you home{' '}

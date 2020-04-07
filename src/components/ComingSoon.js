@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const pattern =
   'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
+const logo =
+  'https://res.cloudinary.com/tihos/image/upload/q_auto/v1586238052/The%20Classic%20Lunchbox/logo_300.gif';
 
 const ComingSoonBody = styled.div`
   height: 100vh;
@@ -43,7 +45,7 @@ const Wrapper = styled.div`
 const ComingSoon = (props) => (
   <ComingSoonBody>
     <Wrapper>
-      <Image src="images/logo_300.png" alt="The Classic Lunchbox Logo" />
+      <Image src={Logo} alt="The Classic Lunchbox Logo" />
       <H1>Coming Soon</H1>
       <h2>to a farmer's market near you!</h2>
       <P>
