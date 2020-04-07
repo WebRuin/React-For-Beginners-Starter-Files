@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const pattern =
   'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
 const Logo =
-  'https://res.cloudinary.com/tihos/image/upload/q_auto/v1586238052/The%20Classic%20Lunchbox/logo_300.gif';
+  'https://res.cloudinary.com/tihos/image/upload/c_scale,q_auto,w_300/v1586239047/The%20Classic%20Lunchbox/The_Classic_Lunchbox_Logo_transperent_1024.png';
 
 const ComingSoonBody = styled.div`
   height: 100vh;
