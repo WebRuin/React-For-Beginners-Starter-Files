@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const pattern =
   'https://res.cloudinary.com/tihos/image/upload/q_auto/v1585937290/pattern3_btd9kp.png';
-const logo =
+const Logo =
   'https://res.cloudinary.com/tihos/image/upload/q_auto/v1586238052/The%20Classic%20Lunchbox/logo_300.gif';
 
 const ComingSoonBody = styled.div`
